@@ -227,7 +227,7 @@ main {
 
 @media screen and (min-width: 768px) {
   main{
-    max-width: 612px;
+    min-width: 612px;
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -236,7 +236,8 @@ main {
   }
 
   .count_card {
-    height: 213px;
+    min-height: 213px;
+    min-width: 188px;
   }
 
   .count__content {
@@ -254,12 +255,63 @@ main {
     line-height: 66px;
   }
 
+}
 
+@media screen and (min-width: 1440px) {
+  main {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: fit-content;
+    min-width: 1116px;
+
+    > * {
+      width: 255px;
+    }
+  }
+  .main_card {
+    grid-column: 1;
+    grid-row: span 2;
+    height: 520px;
+  }
+
+  .main__content {
+    gap: 1.75rem;
+  }
+
+  .main__menu {
+    flex-direction: column;
+    margin-left: 2rem;
+    gap: 1.3125rem;
+  }
+
+  .main__header {
+    flex-direction: column;
+    height: 354px;
+    gap: 2.5rem;
+  }
+
+  .header__image {
+    width: 78px;
+    height: 78px;
+  }
+
+  .header__text {
+    gap: 0;
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 47px;
+    }
+  }
+
+  .count_card {
+    height: 244px;
+  }
 }
 
 
 
 
 
-.attribution { font-size: 11px; text-align: center;  margin-block: 1rem;}
+.attribution { font-size: 11px; text-align: center;  margin-inline: auto; margin-block: 1rem;}
 .attribution a { color: var(--color-purple-500); }
