@@ -30,13 +30,6 @@ body {
   color: var(--color-white);
 }
 
-h1 {
-  /* font-size: 1.25rem;
-  line-height: 130%;
-  letter-spacing: 0.25px;
-  font-weight: 700; */
-}
-
 p {
   font-size: 0.9375rem;
   line-height: 18px;
@@ -232,7 +225,37 @@ main {
 }
 
 
+@media screen and (min-width: 768px) {
+  main{
+    max-width: 612px;
+    grid-template-columns: repeat(3, 1fr);
+  }
 
+  .main_card {
+    grid-column: span 3;
+  }
+
+  .count_card {
+    height: 213px;
+  }
+
+  .count__content {
+    gap: 1rem;
+  }
+
+  .count__text {
+    flex-direction: column;
+    gap: .5rem;
+    align-items: flex-start;
+  }
+
+  .count__current {
+    font-size: 3.5rem;
+    line-height: 66px;
+  }
+
+
+}
 
 
 
