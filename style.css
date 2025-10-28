@@ -194,6 +194,13 @@ main {
   z-index: 1;
 }
 
+.count__content:hover,
+.count__content:active,
+.count__content:focus {
+  background-color: var(--color-navy-800);
+  cursor: pointer;
+}
+
 .count__header {
   display: flex;
   justify-content: space-between;
@@ -306,6 +313,11 @@ main {
 
   .count_card {
     height: 244px;
+  }
+
+  .count__content {
+    gap: 1.5rem;
+    padding: 2rem;
   }
 }
 
