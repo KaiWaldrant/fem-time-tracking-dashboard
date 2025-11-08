@@ -234,7 +234,7 @@ main {
 
 @media screen and (min-width: 768px) {
   main{
-    min-width: 612px;
+    max-width: 700px;
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -269,7 +269,7 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     width: fit-content;
-    min-width: 1116px;
+    max-width: 1116px;
 
     > * {
       width: 255px;

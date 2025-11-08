@@ -1,59 +1,50 @@
-
 const allCards = document.querySelectorAll(".count_card");
 
 fetch("./data.json")
-    .then((response) => response.json())
-    .then((data) => {
-        const daily = document.getElementById('daily');
-        const weekly = document.getElementById('weekly');
-        const monthly = document.getElementById('monthly');
+  .then((response) => response.json())
+  .then((data) => {
+    const rearranged = { daily: {}, weekly: {}, monthly: {} };
 
-        const filter = document.querySelector('.main__menu');
-
-        // filterItems.forEach((item) => {
-        //     item.addEventListener("click", function () {
-        //         filterItems.forEach((filterItem) =>
-        //           filterItem.classList.remove("active")
-        //         );
-        //         this.classList.add("active");
-        //     });
-        // });
-
-        filter.addEventListener("click", (e) => {     
-            // Remove old active class
-            document.querySelectorAll(".filter.active").forEach((item) => {
-                item.classList.remove("active");
-            });
-
-            // Add active class to clicked one
-            e.target.classList.add("active");
-
-            // Get the clicked element’s ID
-            const id = e.target.id;
-
-            // Use the ID downstream (example: update content dynamically)
-            // if (id === "home") {
-            //   content.textContent = "Welcome home!";
-            // } else if (id === "about") {
-            //   content.textContent = "About us section here.";
-            // } else if (id === "contact") {
-            //   content.textContent = "Contact form coming soon.";
-            // }
-
-        });
+    data.forEach((item) => {
+      Object.entries(item.timeframes).forEach(([period, values]) => {
+        rearranged[period][item.title] = { ...values };
+      });
     });
 
-const updateBoards = (data) => {
-  allCards.forEach((card, index) => {
+    console.log(rearranged);
+    const daily = document.getElementById("daily");
+    const weekly = document.getElementById("weekly");
+    const monthly = document.getElementById("monthly");
 
-    let hour;
-    const cat = data[index].title;
-    hour = term || "weekly";
-    const category = board.querySelector(".boards__board-category");
-    const time = board.querySelector(".boards__board-time");
-    const lastTime = board.querySelector(".boards__board-last-time");
-    category.textContent = cat;
-    time.textContent = `${data[index].timeframes[hour].current}hrs`;
-    lastTime.textContent = `Last Week - ${data[index].timeframes[hour].previous}hrs`;
+    const filter = document.querySelector(".main__menu");
+
+    filter.addEventListener("click", (e) => {
+      // Remove old active class
+      document.querySelectorAll(".filter.active").forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      // Add active class to clicked one
+      e.target.classList.add("active");
+
+      // Get the clicked element’s ID
+      const filterId = e.target.id;
+
+      updateCards(rearranged[filterId], filterId);
+
+    });
+    document.querySelector("#weekly").classList.add("active");
+    updateCards(data, "weekly");
+  });
+
+const updateCards = (data, timeframe) => {
+  allCards.forEach((card) => {
+
+    const category = card.querySelector(".count__heading").textContent;
+    const currentTime = card.querySelector(".count__current");
+    const lastTime = card.querySelector(".count__previous");
+    currentTime.textContent = `${data[category].current}hrs`;
+    const prevText = { daily: "Yesterday", weekly: "Last Week", monthly: "Last Month" };
+    lastTime.textContent = `${prevText[timeframe]} - ${data[category].previous}hrs`;
   });
 };
